@@ -8,7 +8,7 @@ app.get("/youtube", (req, res) => {
         .catch(err => res.status(500).send(err));
 });
 
-app.post("/youtube", (req, res) => {
+app.put("/youtube", (req, res) => {
     new Youtube().download(req.query)
         .then(result => res.send(result))
         .catch(err => res.status(500).send(err))
@@ -20,7 +20,7 @@ app.get("/youtube/playlist", (req, res) => {
         .catch(err => res.status(500).send(err))
 });
 
-app.post("/youtube/playlist", (req, res) => {
+app.put("/youtube/playlist", (req, res) => {
     new Youtube().downloadPlaylist(req.body)
         .then(result => res.send(result))
         .catch(err => res.status(500).send(err));

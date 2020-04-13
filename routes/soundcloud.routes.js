@@ -8,7 +8,7 @@ app.get("/soundcloud", (req, res) => {
         .catch(err => res.status(500).send(err));
 });
 
-app.post("/soundcloud", (req, res) => {
+app.put("/soundcloud", (req, res) => {
     new Soundcloud().downlaod(req.body)
         .then(info => res.send(info))
         .catch(err => res.status(500).send(err));
@@ -20,7 +20,7 @@ app.get("/soundcloud/playlist", (req, res) => {
         .catch(err => res.status(500).send(err));
 });
 
-app.post("/soundcloud/playlist", (req, res) => {
+app.put("/soundcloud/playlist", (req, res) => {
     new Soundcloud().downlaodPlaylist(req.body)
         .then(info => res.send(info))
         .catch(err => res.status(500).send(err));
