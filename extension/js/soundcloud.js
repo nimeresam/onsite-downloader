@@ -36,11 +36,10 @@ function createButton({
     // add listener to download on click
     button.addEventListener("click", function (event) {
         // add origin to the href
-        href = document.location.origin + href;
-        fetch("http://localhost:4895/api/soundcloud?url=" + href)
+        let url = document.location.origin + href;
+        fetch("http://localhost:4895/api/soundcloud?url=" + url, { method: "POST" })
             .then(res => res.json())
             .then(res => {
-                if (!res.href) return alert("Failed to download song");
                 // get downloadable href
                 console.log(res);
             })

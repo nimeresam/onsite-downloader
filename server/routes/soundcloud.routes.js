@@ -8,6 +8,14 @@ app.get("/soundcloud", (req, res) => {
         .catch(err => res.status(500).send(err));
 });
 
+app.post("/soundcloud", (req, res) => {
+    let downloader = new Soundcloud();
+    downloader.getInfo(req.query.url)
+        .then(info => downloader.downlaod(info))
+        .then(result => res.send(result))
+        .catch(err => res.status(500).send(err));
+});
+
 app.put("/soundcloud", (req, res) => {
     new Soundcloud().downlaod(req.body)
         .then(info => res.send(info))

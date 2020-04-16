@@ -16,7 +16,7 @@ class Downloader {
      */
     _getPath(fileName, { folder, extension } = {}) {
         // remove special character
-        let fileName = name.replace(/[^a-zA-Z ]/g, "").trim();
+        fileName = fileName.replace(/[^a-zA-Z ]/g, "").trim();
         // check folder is exist
         let path = process.env.DOWNLOADS;
         if (folder) {

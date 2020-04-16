@@ -25,7 +25,7 @@ class Soundcloud extends require("./downloader") {
             fileName = this._getPath(fileName, { folder });
     
             request.get(href)
-                .on('complete', () => resolve("Done!"))
+                .on('complete', () => resolve({ fileName }))
                 .on('error', reject)
                 .pipe(fs.createWriteStream(fileName));
         });
