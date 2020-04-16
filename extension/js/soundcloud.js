@@ -15,7 +15,7 @@ window.onload = function (ev) {
  * @param {string} [url] 
  * @returns {HTMLButtonElement} 
  */
-function getButton({
+function createButton({
     href = document.location.pathname,
     size = "medium",
     iconOnly = false
@@ -69,7 +69,7 @@ function modifyDOM(ev) {
             // get href from title anchor
             const href = track.getElementsByTagName("a")[1].getAttribute("href");
             // declare button
-            const button = getButton({ href, iconOnly: true, size: "small" });
+            const button = createButton({ href, iconOnly: true, size: "small" });
             // add button to actions list
             const row = track.getElementsByClassName("sc-button-group sc-button-group-small")[0];
             if (row) row.appendChild(button);
@@ -86,7 +86,7 @@ function modifyDOM(ev) {
             // get href from title anchor
             const href = track.getElementsByTagName("a")[0].getAttribute("href");
             // declare button
-            const button = getButton({ href, size: "small" });
+            const button = createButton({ href, size: "small" });
             // add button to actions list
             const row = track.getElementsByClassName("sc-button-group sc-button-group-small")[0];
             if (row) row.appendChild(button);
@@ -98,7 +98,7 @@ function modifyDOM(ev) {
         // get actions row
         const row = document.getElementsByClassName("sc-button-group sc-button-group-medium")[0];
         // delcare button
-        const button = getButton();
+        const button = createButton();
         // add button to the bar
         if (row) row.appendChild(button);
     }
