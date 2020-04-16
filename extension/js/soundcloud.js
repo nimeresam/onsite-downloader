@@ -2,7 +2,7 @@
 var serviceUrl = "http://localhost:4895/api/soundcloud";
 
 window.onload = function (ev) {
-    // only for sound cloud
+    // only for soundcloud
     if (document.domain.indexOf("soundcloud") == -1) return;
     var currentUrl = "";
     // modfiy DOM 

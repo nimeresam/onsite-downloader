@@ -26,9 +26,9 @@
     },
     "content_scripts": [
       {
-        "matches": ["*://*.soundcloud.com/*"],
+        "matches": ["*://*.soundcloud.com/*", "*://*.youtube.com/*"],
         "run_at": "document_idle",
-        "js": ["js/soundcloud.js"]
+        "js": ["js/soundcloud.js", "js/youtube.js"]
       }
     ]
 }
