@@ -34,7 +34,7 @@ class Soundcloud extends require("./downloader") {
     /**
      * Get soundcloud track info
      * @param {string} url 
-     * @returns {Promise<object>} track info including: name, thumbnail and href
+     * @returns {Promise<object>} track info including: fileName, thumbnail and href
      */
     async getInfo(url) {
         const browser = await puppeteer.launch();
@@ -56,15 +56,15 @@ class Soundcloud extends require("./downloader") {
         ]);
         // get song name, thumbnail and href
         const result = await page.evaluate(() => {
-            const name = document.getElementsByTagName("i")[1].innerText;
+            const fileName = document.getElementsByTagName("i")[1].innerText;
             const thumbnail = document.getElementById("thumbnail").getAttribute("src");
             const button = document.getElementsByClassName("expanded button")[1];
             const href = button.getAttribute("href");
-            return { name, thumbnail, href };
+            return { fileName, thumbnail, href };
         });
     
         await browser.close();
-        
+
         return result;
     }
 
