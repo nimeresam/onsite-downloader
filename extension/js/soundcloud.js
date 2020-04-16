@@ -89,9 +89,12 @@ function createButton(href, size) {
  * @param {boolean} [recursive]
  */
 function modifyDOM(ev, recursive) {
-    // handle tracklist
+    // handle album tracks
     if (document.getElementsByClassName("trackList__item sc-border-light-bottom").length)
         return extractList("trackList__item sc-border-light-bottom", 1);
+    // handle playlist tracks
+    if(document.getElementsByClassName("systemPlaylistTrackList__item sc-border-light-bottom").length)
+        return extractList("systemPlaylistTrackList__item sc-border-light-bottom", 1);
     // handle search list
     if (document.getElementsByClassName("search__listWrapper").length)
         return extractList("searchList__item", 0);
