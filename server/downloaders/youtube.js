@@ -27,25 +27,31 @@ class Youtube extends require("./downloader") {
      */
     download({
         url,
-        fileName,
+        title,
         folder,
-        filter,
-        quality = 'highest'
+        filter = "",
+        quality = "highest"
     }) {
         // TODO: check filter and quality spilling
         return new Promise((resolve, reject) => {
             // check extension
-            const extension = filter && filter.indexOf("video") == -1? ".mp3": ".mp4";
+            var extension = ".mp4";
+            // handle audio filter and quality
+            if(filter.indexOf("video") == -1) {
+                quality += "audio";
+                extension = ".mp3";
+            }
+            else quality += "video";
             // add file to downloads folder
-            const path = this._getPath(fileName, { folder, extension });
+            const path = this._getPath(title, { folder, extension });
             ytdl(url, { filter, quality })
                 .on("progress", (length, current, total) => {
                     // declare parcent
                     let percent = Math.round(current / total * 100);
-                    console.log(fileName, percent + ' %');
+                    console.log(title, percent + ' %');
                 })
                 .on("error", reject)
-                .on("end", () => resolve("Done!"))
+                .on("end", () => resolve({ result: "Done!"}))
                 .pipe(fs.createWriteStream(path));
         });
     }

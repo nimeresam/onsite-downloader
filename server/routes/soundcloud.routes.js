@@ -13,7 +13,7 @@ app.post("/soundcloud", (req, res) => {
     downloader.getInfo(req.query.url)
         .then(info => downloader.downlaod(info))
         .then(result => res.send(result))
-        .catch(err => res.status(500).send(err));
+        .catch(err =>res.status(500).send(err));
 });
 
 app.put("/soundcloud", (req, res) => {

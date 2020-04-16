@@ -9,7 +9,7 @@ app.get("/youtube", (req, res) => {
 });
 
 app.put("/youtube", (req, res) => {
-    new Youtube().download(req.query)
+    new Youtube().download(req.body)
         .then(result => res.send(result))
         .catch(err => res.status(500).send(err))
 });
