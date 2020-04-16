@@ -5,6 +5,8 @@
 # TODO: phase 2
 - add logger 
 - cleanse routes
+- cleanse services
+- cleanse extension
 - check downloads path
 - add options for youtube download
 - add download playlist for soundcloud
@@ -16,3 +18,4 @@
 # TODO: phase 3
 - download facebook videos
 - set extension options
+- add extension icon
