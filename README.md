@@ -16,6 +16,7 @@
 - add socket.io
 
 # TODO: phase 3
+- use soundcloud title instead of downloader returned title
 - download facebook videos
 - set extension options
 - add extension icon
