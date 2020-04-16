@@ -18,5 +18,11 @@
     "request": "^2.88.2",
     "youtube-playlist": "^1.0.2",
     "ytdl-core": "^2.0.1"
+  },
+  "jshintConfig": {
+    "esversion": 9,
+    "eqnull": true,
+    "evil": true,
+    "laxcomma": true
   }
 }
