@@ -5,3 +5,5 @@
 # TODO: phase 2
 - add logger 
 - check downloads path
+- add download playlist for soundcloud
+- track downloading changes 
