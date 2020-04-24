@@ -3,16 +3,13 @@
 # - add DOM modify for youtube 
 
 # TODO: phase 2
+- add socket.io server
+- add socket.io client
 - add logger 
 - cleanse routes
 - cleanse services
-- cleanse extension
+# - cleanse extension
 - check downloads path
-- add options for youtube download
-- add download playlist for soundcloud
-- add download playlist for youtube
-- download youtube video from search
-- add button id for socket
 - add socket.io
 
 # TODO: phase 3
