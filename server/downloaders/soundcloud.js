@@ -17,12 +17,11 @@ class Soundcloud extends require("./downloader") {
      */
     downlaod({
         href,
-        fileName,
-        folder
+        fileName
     }) {
         return new Promise((resolve, reject) => {
             // add file to downloads folder
-            fileName = this._getPath(fileName, { folder });
+            fileName = this._getPath(fileName);
     
             request.get(href)
                 .on('complete', () => resolve({ fileName }))

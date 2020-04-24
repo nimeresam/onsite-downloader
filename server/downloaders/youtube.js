@@ -3,7 +3,7 @@ const fs = require("fs");
 const ytdl = require("ytdl-core");
 
 class Youtube extends require("./downloader") {
-    
+
     /**
      * get video info
      * @param {string} url 
@@ -27,7 +27,6 @@ class Youtube extends require("./downloader") {
     download({
         url,
         title,
-        folder,
         filter = "",
         quality = "highest"
     }) {
@@ -36,21 +35,34 @@ class Youtube extends require("./downloader") {
             // check extension
             var extension = ".mp4";
             // handle audio filter and quality
-            if(filter.indexOf("video") == -1) {
+            if (filter.indexOf("video") == -1) {
                 quality += "audio";
                 extension = ".mp3";
             }
             else quality += "video";
+            // used to avoid duplicates
+            var currentPercent = 0, resolved = false;
             // add file to downloads folder
-            const path = this._getPath(title, { folder, extension });
+            const path = this._getPath(title, extension);
             ytdl(url, { filter, quality })
                 .on("progress", (length, current, total) => {
-                    // declare parcent
+                    // calculate current parcent
                     let percent = Math.round(current / total * 100);
-                    console.log(title, percent + ' %');
+                    // ignore duplicates
+                    if (percent == currentPercent) return;
+                    // record new percent
+                    currentPercent = percent;
+                    global["io"].emit(url, { percent });
+                    console.log(percent)
+                })
+                .on("data", () => {
+                    // skip if already resolved before
+                    if(resolved) return;
+                    resolved = true;
+                    resolve({ result: "On Progress!" });
                 })
                 .on("error", reject)
-                .on("end", () => resolve({ result: "Done!"}))
+                .on("end", () => global["io"].emit(url, { status: "finish" }))
                 .pipe(fs.createWriteStream(path));
         });
     }

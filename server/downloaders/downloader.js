@@ -10,17 +10,17 @@ class Downloader {
      * @private
      * Get full path for the file
      * @param {string} fileName 
-     * @param {string} [folder] 
      * @param {string} [extension]
      * @returns {string} path from downloads folder 
      */
-    _getPath(fileName, { folder, extension } = {}) {
+    _getPath(fileName, extension) {
         // remove special character
-        fileName = fileName.replace(/[^a-zA-Z ]/g, "").trim();
+        fileName = fileName.replace(/[\/\|\?\!\*\'\:\<\>\'\"\\]/g, "").trim();
         // check folder is exist
         let path = process.env.DOWNLOADS;
-        if (folder) {
-            path += "\\" + folder;
+        // add custom folder name for the application
+        if (process.env.folder) {
+            path += "\\" + process.env.folder;
             let exist = fs.existsSync(path);
             if (!exist) fs.mkdirSync(path);
         }

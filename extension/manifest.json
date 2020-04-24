@@ -5,7 +5,10 @@
     "manifest_version": 2,
     "permissions": ["activeTab", "declarativeContent", "storage"],
     "background": {
-      "scripts": ["js/background.js"],
+      "scripts": [
+        "js/socket.io.js",
+        "js/background.js"
+      ],
       "persistent": false
     },
     "options_page": "html/options.html",
@@ -27,7 +30,11 @@
       {
         "matches": ["*://*.soundcloud.com/*", "*://*.youtube.com/*"],
         "run_at": "document_idle",
-        "js": ["js/content.script.js", "js/soundcloud.js", "js/youtube.js"]
+        "js": [
+          "js/content.script.js", 
+          "js/soundcloud.js", 
+          "js/youtube.js"
+        ]
       }
     ]
 }

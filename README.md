@@ -6,8 +6,8 @@
 - add socket.io server
 - add socket.io client
 - add logger 
-- cleanse routes
-- cleanse services
+# - cleanse routes
+# - cleanse services
 # - cleanse extension
 - run application as windows service
 
