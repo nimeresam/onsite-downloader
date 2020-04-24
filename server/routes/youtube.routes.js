@@ -8,22 +8,10 @@ app.get("/youtube", (req, res) => {
         .catch(err => res.status(500).send(err));
 });
 
-app.put("/youtube", (req, res) => {
+app.post("/youtube", (req, res) => {
     new Youtube().download(req.body)
         .then(result => res.send(result))
         .catch(err => res.status(500).send(err))
-});
-
-app.get("/youtube/playlist", (req, res) => {
-    new Youtube().getPlaylistInfo(req.query.url)
-        .then(result => res.send(result))
-        .catch(err => res.status(500).send(err))
-});
-
-app.put("/youtube/playlist", (req, res) => {
-    new Youtube().downloadPlaylist(req.body)
-        .then(result => res.send(result))
-        .catch(err => res.status(500).send(err));
 });
 
 module.exports = app;

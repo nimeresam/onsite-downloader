@@ -49,7 +49,7 @@ function Youtube(ev, recursive) {
             button.disabled = true;
             // download track       
             fetch(serviceUrl, {
-                method: "PUT", body: JSON.stringify({ title: title, url: url, filter: filter }), headers: { 'Content-Type': 'application/json' }
+                method: "POST", body: JSON.stringify({ title: title, url: url, filter: filter }), headers: { 'Content-Type': 'application/json' }
             })
                 .then(res => res.json())
                 .then(res => {

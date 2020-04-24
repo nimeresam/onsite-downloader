@@ -1,7 +1,6 @@
 const fs = require("fs");
 
 const ytdl = require("ytdl-core");
-const ytpl = require("youtube-playlist");
 
 class Youtube extends require("./downloader") {
     
@@ -54,37 +53,6 @@ class Youtube extends require("./downloader") {
                 .on("end", () => resolve({ result: "Done!"}))
                 .pipe(fs.createWriteStream(path));
         });
-    }
-
-    /**
-     * get video info
-     * @param {string} url 
-     * @returns {Promise<object[]>} each object has: id, url and name
-     */
-    async getPlaylistInfo(url) {
-        const { data = {} } = await ytpl(url).catch(err => { throw err; });
-        return data;
-    }
-
-    /**
-     * download playlist
-     * @param {object[]} playlist each object has: id, url and name
-     * @param {string} [folder] name to save all items in
-     * @param {'audioandvideo' | 'video' | 'videoonly' | 'audio' | 'audioonly'} [filter='audioandvideo'] 
-     * @param {'lowest' | 'highest'} [quality='highest'] 
-     */
-    async downloadPlaylist({
-        playlist,
-        folder,
-        quality,
-        filter
-    }) {
-        // download each video seperately
-        for (let video of playlist) {
-            let { url, name: fileName } = video;
-            await this.download({ url, fileName, folder, quality, filter }).catch(err => { /* Just to catch */ });
-        }
-        return "Done!";
     }
 }
 

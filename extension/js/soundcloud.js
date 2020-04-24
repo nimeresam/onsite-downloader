@@ -55,7 +55,7 @@ function Soundcloud(en, recursive) {
                     button.innerText = "Running..";
                     // TODO: check info
                     return fetch(serviceUrl, {
-                        method: "PUT", body: JSON.stringify(info), headers: { 'Content-Type': 'application/json' }
+                        method: "POST", body: JSON.stringify(info), headers: { 'Content-Type': 'application/json' }
                     });
                 })
                 .then(res => res.json())

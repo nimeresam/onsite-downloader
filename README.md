@@ -9,10 +9,11 @@
 - cleanse routes
 - cleanse services
 # - cleanse extension
-- check downloads path
-- add socket.io
+- run application as windows service
+
 
 # TODO: phase 3
+- check downloads path
 - use soundcloud title instead of downloader returned title
 - download facebook videos
 - set extension options

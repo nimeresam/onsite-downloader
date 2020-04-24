@@ -9,27 +9,7 @@ app.get("/soundcloud", (req, res) => {
 });
 
 app.post("/soundcloud", (req, res) => {
-    let downloader = new Soundcloud();
-    downloader.getInfo(req.query.url)
-        .then(info => downloader.downlaod(info))
-        .then(result => res.send(result))
-        .catch(err =>res.status(500).send(err));
-});
-
-app.put("/soundcloud", (req, res) => {
     new Soundcloud().downlaod(req.body)
-        .then(info => res.send(info))
-        .catch(err => res.status(500).send(err));
-});
-
-app.get("/soundcloud/playlist", (req, res) => {
-    new Soundcloud().getPlaylistInfo(req.query.url)
-        .then(info => res.send(info))
-        .catch(err => res.status(500).send(err));
-});
-
-app.put("/soundcloud/playlist", (req, res) => {
-    new Soundcloud().downlaodPlaylist(req.body)
         .then(info => res.send(info))
         .catch(err => res.status(500).send(err));
 });
