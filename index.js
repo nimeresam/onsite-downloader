@@ -16,4 +16,8 @@ const server = require("http").createServer(app);
 const io = require("socket.io")(server);
 global["io"] = io;
 
+io.sockets.on('connection',function(socket){
+    console.log("new connection");
+});
+
 server.listen(4895);
