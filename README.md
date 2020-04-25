@@ -9,7 +9,7 @@
 # - cleanse routes
 # - cleanse services
 # - cleanse extension
-- run application as windows service
+# - run application as windows service
 
 
 # TODO: phase 3
