@@ -4,9 +4,11 @@
  * @param {boolean} [recursive]
  */
 function Youtube(ev, recursive) {
+    
     // get primary div in the page
     const primary = document.getElementById("primary-inner");
-    if (primary) return appendButton(primary);
+    // check if this page is watch page
+    if(document.location.pathname == '/watch') return appendButton(primary);
 
     // give it another try
     if (recursive) return;
@@ -51,13 +53,13 @@ function Youtube(ev, recursive) {
         // add listener to download on click
         button.addEventListener("click", function (event) {
             // give the user an option to download it as mp3
-            let filter = confirm("Download audio only?")? "audioonly": "video";
+            let audioOnly = confirm("Download audio only?");
             // set button text
             button.innerText = "Waiting..";
             button.disabled = true;
             // download track       
             fetch(serviceUrl, {
-                method: "POST", body: JSON.stringify({ title: title, url: url, filter: filter }), headers: { 'Content-Type': 'application/json' }
+                method: "POST", body: JSON.stringify({ title: title, url: url, audioOnly: audioOnly }), headers: { 'Content-Type': 'application/json' }
             })
                 .then(res => res.json())
                 .then(res => {
@@ -65,9 +67,9 @@ function Youtube(ev, recursive) {
                     button.innerText = "Running..";
                 })
                 .catch(err => {
-                    button.innerText = "Failed!";
-                    setTimeout(() => { button.innerText = "Download"; button.disabled = false; }, 500);
-                    console.error("Downloader Extension: ", err);
+                    button.innerText = "Download"; 
+                    button.disabled = false;
+                    console.warn("Downloader Extension: ", err);
                 });
         });
 

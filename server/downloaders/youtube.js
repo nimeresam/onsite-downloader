@@ -21,14 +21,14 @@ class Youtube extends require("./downloader") {
      * download youtube video 
      * @param {string} url
      * @param {string} fileName 
-     * @param {'audioandvideo' | 'video' | 'videoonly' | 'audio' | 'audioonly'} [filter] 
+     * @param {bool} [audioOnly] 
      * @param {'lowest' | 'highest'} [quality='highest'] 
      * @returns {Promise} download result
      */
     download({
         url,
         title,
-        filter = "",
+        audioOnly,
         quality = "highest"
     }) {
         // TODO: check filter and quality spilling
@@ -36,16 +36,16 @@ class Youtube extends require("./downloader") {
             // check extension
             var extension = ".mp4";
             // handle audio filter and quality
-            if (filter.indexOf("video") == -1) {
+            if (audioOnly) {
                 quality += "audio";
                 extension = ".mp3";
             }
-            else quality += "video";
+            // else quality += "video";
             // used to avoid duplicates
-            var currentPercent = 0, resolved = false;
+            var currentPercent = 0;
             // add file to downloads folder
             const path = this._getPath(title, extension);
-            ytdl(url, { filter, quality })
+            ytdl(url, { quality })
                 .on("progress", (length, current, total) => {
                     // calculate current parcent
                     let percent = Math.round(current / total * 100);
@@ -55,13 +55,12 @@ class Youtube extends require("./downloader") {
                     currentPercent = percent;
                     global["io"].emit("progress", { url, innerText: percent + " %", disabled: 1 });
                 })
-                .on("data", () => {
-                    // skip if already resolved before
-                    if (resolved) return;
-                    resolved = true;
-                    resolve({ result: "On Progress!" });
+                .on("data", () => resolve({ result: "On Progress!" }))
+                .on("error", err => {
+                    console.info(err)
+                    global["io"].emit("progress", { url, innerText: "Download", disabled: 0 });
+                    reject(err);
                 })
-                .on("error", reject)
                 .on("end", () => global["io"].emit("progress", { url, innerText: "Download", disabled: 0 }))
                 .pipe(fs.createWriteStream(path));
         });
