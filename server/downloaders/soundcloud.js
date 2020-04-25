@@ -22,9 +22,8 @@ class Soundcloud extends require("./downloader") {
         return new Promise((resolve, reject) => {
             // add file to downloads folder
             fileName = this._getPath(fileName);
-            console.log(href)
             request.get(href)
-                .on('complete', () => { resolve({ fileName }); console.log("Done") })
+                .on('complete', () => resolve({ fileName }))
                 .on('error', reject)
                 .pipe(fs.createWriteStream(fileName));
         });
