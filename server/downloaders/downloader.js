@@ -39,6 +39,18 @@ class Downloader {
      * @async
      */
     download() { }
+
+    /**
+     * @abstract
+     * @async
+     */
+    getPlaylistInfo() { }
+
+    /**
+     * @abstract
+     * @async
+     */
+    downlaodPlaylist() { }
 }
 
 module.exports = Downloader;

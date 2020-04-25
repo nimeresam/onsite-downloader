@@ -11,7 +11,7 @@ function Soundcloud(en, recursive) {
         return extractList("trackList__item sc-border-light-bottom", 1);
     // handle playlist tracks
     if (document.getElementsByClassName("systemPlaylistTrackList__item sc-border-light-bottom").length)
-        return extractList("systemPlaylistTrackList__item sc-border-light-bottom", 1);
+        return extractList("systemPlaylistTrackList__item sc-border-light-bottom", 2);
     // handle search list
     if (document.getElementsByClassName("search__listWrapper").length)
         return extractList("searchList__item", 0);
@@ -53,6 +53,7 @@ function Soundcloud(en, recursive) {
                 // download track
                 .then(info => {
                     button.innerText = "Running..";
+                    console.log()
                     // TODO: check info
                     return fetch(serviceUrl, {
                         method: "POST", body: JSON.stringify(info), headers: { 'Content-Type': 'application/json' }

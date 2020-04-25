@@ -35,17 +35,25 @@ function Youtube(ev, recursive) {
             lineHeight: "1",
             padding: "var(--yt-button-icon-padding, 8px)",
             height: "var(--yt-button-icon-size, var(--yt-icon-height, 40px))",
+            width: "max-content"
         });
         // add icon class if requested
         button.innerText = "Download";
+        // add origin to the href
+        let url = document.location.origin + href;
+        // listen to socket events
+        socket.on("progress", socketEvent => {
+            if(socketEvent.url != url) return;
+            // set properties
+            button.innerText = socketEvent.innerText;
+            button.disabled = socketEvent.disabled? true: false;
+        })
         // add listener to download on click
         button.addEventListener("click", function (event) {
-            // add origin to the href
-            let url = document.location.origin + href;
             // give the user an option to download it as mp3
             let filter = confirm("Download audio only?")? "audioonly": "video";
             // set button text
-            button.innerHTML = "Running..";
+            button.innerText = "Waiting..";
             button.disabled = true;
             // download track       
             fetch(serviceUrl, {
@@ -53,9 +61,8 @@ function Youtube(ev, recursive) {
             })
                 .then(res => res.json())
                 .then(res => {
-                    button.innerText = "Done!";
-                    button.disabled = false;
-                    setTimeout(() => { button.innerText = "Download"; button.disabled = false; }, 500);
+                    // TODO: log
+                    button.innerText = "Running..";
                 })
                 .catch(err => {
                     button.innerText = "Failed!";

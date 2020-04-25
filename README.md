@@ -3,8 +3,8 @@
 # - add DOM modify for youtube 
 
 # TODO: phase 2
-- add socket.io server
-- add socket.io client
+# - add socket.io server
+# - add socket.io client
 - add logger 
 # - cleanse routes
 # - cleanse services
