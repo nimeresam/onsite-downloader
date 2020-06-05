@@ -1,20 +1,9 @@
-# TODO: phase 1
-# - add download post function for soundcloud
-# - add DOM modify for youtube 
+Chrome extension that adds "Download" button at youtube and soudcloud, make requests with windows service built using NodeJS with ExpressJS to download file using third party downloaders.
 
-# TODO: phase 2
-# - add socket.io server
-# - add socket.io client
-- add logger 
-# - cleanse routes
-# - cleanse services
-# - cleanse extension
-# - run application as windows service
-
-
-# TODO: phase 3
-- check downloads path
-- use soundcloud title instead of downloader returned title
-- download facebook videos
-- set extension options
-- add extension icon
+How to use it?
+- check you have nodeJS v8 or v10 on your device.
+- install packeges.
+- run setup.js file using
+- add extension to your google chrome.
+- you will find download button when you open soundcloud or youtube.
+- enjoy!
